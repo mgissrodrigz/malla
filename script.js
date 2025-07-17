@@ -21,24 +21,26 @@ const semestres = {
     ],
     "Cuarto Semestre": [
         { codigo: "AM-221", nombre: "Anatomía Macroscópica", requisitos: ["QQ-214", "BI-121"] },
-        { codigo: "NE-111", nombre: "Neuroanatomía", requisitos: ["QQ-214", "BI-121"] },
+        { codigo: "NA-111", nombre: "Neuroanatomía", requisitos: ["QQ-214", "BI-121"] },
         { codigo: "EL-111", nombre: "Embriología General", requisitos: ["QQ-214", "BI-121"] },
         { codigo: "HE-223", nombre: "Histología General", requisitos: ["QQ-214", "BI-121"] },
         { codigo: "OSE-173", nombre: "Odontología Sanitaria I", requisitos: ["QQ-214", "BI-121"] }
     ],
     "Quinto Semestre": [
-        { codigo: "AME-184", nombre: "Anatomía y Medicina Dental", requisitos: ["AM-221"] },
+        { codigo: "AME-184", nombre: "Anatomía y Modelado Dental", requisitos: ["AM-221"] },
         { codigo: "FM-111", nombre: "Anatomía de Cabeza y Cuello", requisitos: ["AM-221", "NE-111"] },
         { codigo: "FI-111", nombre: "Fisiología I", requisitos: ["AM-221"] },
         { codigo: "HEE-224", nombre: "Histología y Embriología Bucodental", requisitos: ["EL-111", "HE-223"] },
-        { codigo: "OSE-174", nombre: "Odontología Sanitaria II", requisitos: ["OSE-173"] }
+        { codigo: "OSE-174", nombre: "Odontología Sanitaria II", requisitos: ["OSE-173"] },
+        { codigo: "MB-111", nombre: "Microbiología", requisitos: ["AM-221", "NA-111"] }
     ],
     "Sexto Semestre": [
         { codigo: "OCE-265", nombre: "Oclusión", requisitos: ["FM-111", "AME-184"] },
         { codigo: "RDE-275", nombre: "Radiología", requisitos: [] },
         { codigo: "PGE-285", nombre: "Psicología", requisitos: ["FM-111"] },
         { codigo: "FC-511", nombre: "Farmacología", requisitos: ["NE-111", "FM-111"] },
-        { codigo: "EPE-244", nombre: "Propedéutica", requisitos: ["OSE-173"] }
+        { codigo: "EPE-244", nombre: "Epidemiología", requisitos: ["OSE-173"] },
+        { codigo: "PGE-285", nombre: "Patología General", requisitos: ["MB-111", "FM-111"] }
     ],
     "Séptimo Semestre": [
         { codigo: "OPE-326", nombre: "Operatoria Dental I", requisitos: ["HEE-224", "OCE-265"] },
