@@ -1,61 +1,85 @@
+const semestres = {
+    "Primer Semestre": [
+        { codigo: "BI-121", nombre: "Biología General", requisitos: [] },
+        { codigo: "QQ-103", nombre: "Química General", requisitos: [] },
+        { codigo: "SC-101", nombre: "Sociología", requisitos: [] },
+        { codigo: "IF-105", nombre: "Informática", requisitos: [] },
+        { codigo: "MM-121", nombre: "Matemática", requisitos: [] },
+        { codigo: "EG-011", nombre: "Español", requisitos: [] }
+    ],
+    "Segundo Semestre": [
+        { codigo: "QQ-214", nombre: "Química Orgánica", requisitos: ["QQ-103", "BI-121"] },
+        { codigo: "FF-101", nombre: "Bioestadística", requisitos: [] },
+        { codigo: "FI-101", nombre: "Filosofía", requisitos: [] },
+        { codigo: "HH-101", nombre: "Historia de Honduras", requisitos: [] }
+    ],
+    "Tercer Semestre": [
+        { codigo: "OptCN", nombre: "Optativa de Ciencias Naturales", requisitos: ["BI-121"] },
+        { codigo: "OptHum", nombre: "Optativa de Humanidades", requisitos: [] },
+        { codigo: "OptArt", nombre: "Optativa de Arte o Deporte", requisitos: [] },
+        { codigo: "IOE-041", nombre: "Introducción a la Odontología", requisitos: [] }
+    ],
+    "Cuarto Semestre": [
+        { codigo: "AM-221", nombre: "Anatomía Macroscópica", requisitos: ["QQ-214", "BI-121"] },
+        { codigo: "NE-111", nombre: "Neuroanatomía", requisitos: ["QQ-214", "BI-121"] },
+        { codigo: "EL-111", nombre: "Embriología General", requisitos: ["QQ-214", "BI-121"] },
+        { codigo: "HE-223", nombre: "Histología General", requisitos: ["QQ-214", "BI-121"] },
+        { codigo: "OSE-173", nombre: "Odontología Sanitaria I", requisitos: ["QQ-214", "BI-121"] }
+    ],
+    "Quinto Semestre": [
+        { codigo: "AME-184", nombre: "Anatomía y Medicina Dental", requisitos: ["AM-221"] },
+        { codigo: "FM-111", nombre: "Anatomía de Cabeza y Cuello", requisitos: ["AM-221", "NE-111"] },
+        { codigo: "FI-111", nombre: "Fisiología I", requisitos: ["AM-221"] },
+        { codigo: "HEE-224", nombre: "Histología y Embriología Bucodental", requisitos: ["EL-111", "HE-223"] },
+        { codigo: "OSE-174", nombre: "Odontología Sanitaria II", requisitos: ["OSE-173"] }
+    ],
+    "Sexto Semestre": [
+        { codigo: "OCE-265", nombre: "Oclusión", requisitos: ["FM-111", "AME-184"] },
+        { codigo: "RDE-275", nombre: "Radiología", requisitos: [] },
+        { codigo: "PGE-285", nombre: "Psicología", requisitos: ["FM-111"] },
+        { codigo: "FC-511", nombre: "Farmacología", requisitos: ["NE-111", "FM-111"] },
+        { codigo: "EPE-244", nombre: "Propedéutica", requisitos: ["OSE-173"] }
+    ]
+};
 
-const materias = [
-  { codigo: "BI-121", nombre: "Biología General", semestre: "Primer Año - Primer Semestre", requisito: [] },
-  { codigo: "QQ-103", nombre: "Química General", semestre: "Primer Año - Primer Semestre", requisito: [] },
-  { codigo: "QQ-214", nombre: "Química Orgánica", semestre: "Primer Año - Segundo Semestre", requisito: ["QQ-103", "BI-121"] },
-  { codigo: "AM-221", nombre: "Anatomía Macroscópica", semestre: "Segundo Año - Cuarto Semestre", requisito: ["QQ-214", "BI-121"] },
-  { codigo: "OPE-326", nombre: "Operatoria Dental I", semestre: "Cuarto Año - Séptimo Semestre", requisito: ["AM-221"] },
-  { codigo: "OPE-397", nombre: "Operatoria Dental II", semestre: "Cuarto Año - Octavo Semestre", requisito: ["OPE-326"] },
-  { codigo: "OPE-559", nombre: "Operatoria Dental IV", semestre: "Quinto Año - Décimo Semestre", requisito: ["OPE-397"] }
-];
+const contenedor = document.getElementById("contenedor-malla");
 
-const estadoMaterias = {};
+for (const [semestre, ramos] of Object.entries(semestres)) {
+    const columna = document.createElement("div");
+    columna.className = "semestre";
+    columna.innerHTML = `<h2>${semestre}</h2>`;
 
-function renderMalla() {
-  const malla = document.getElementById("malla");
-  const detalleTexto = document.getElementById("detalle-texto");
-  malla.innerHTML = "";
-
-  const semestres = [...new Set(materias.map(m => m.semestre))];
-  semestres.forEach(semestre => {
-    const divSem = document.createElement("div");
-    divSem.className = "semestre";
-    divSem.innerHTML = `<h2>${semestre}</h2>`;
-
-    materias
-      .filter(m => m.semestre === semestre)
-      .forEach(m => {
+    ramos.forEach(ramo => {
         const div = document.createElement("div");
-        div.className = "materia";
-        div.id = m.codigo;
-        div.innerText = `${m.codigo} - ${m.nombre}`;
+        div.classList.add("ramo");
+        div.id = ramo.codigo;
+        div.innerText = `${ramo.codigo}\n${ramo.nombre}`;
+        div.onclick = () => aprobarRamo(ramo.codigo);
+        columna.appendChild(div);
+    });
 
-        const completada = localStorage.getItem(m.codigo) === "true";
-        estadoMaterias[m.codigo] = completada;
-
-        if (completada) div.classList.add("completada");
-
-        const requisitosCumplidos = m.requisito.every(req => estadoMaterias[req]);
-        if (!completada && !requisitosCumplidos && m.requisito.length > 0) {
-          div.classList.add("bloqueada");
-        }
-
-        div.onclick = () => {
-          if (div.classList.contains("bloqueada")) return;
-
-          div.classList.toggle("completada");
-          const hecho = div.classList.contains("completada");
-          estadoMaterias[m.codigo] = hecho;
-          localStorage.setItem(m.codigo, hecho);
-          renderMalla();
-          detalleTexto.innerText = `Materia: ${m.nombre}\nCódigo: ${m.codigo}\nRequisitos: ${m.requisito.length ? m.requisito.join(", ") : "Ninguno"}`;
-        };
-
-        divSem.appendChild(div);
-      });
-
-    malla.appendChild(divSem);
-  });
+    contenedor.appendChild(columna);
 }
 
-window.onload = renderMalla;
+function actualizarDesbloqueo() {
+    for (const ramos of Object.values(semestres)) {
+        ramos.forEach(ramo => {
+            const requisitosCumplidos = ramo.requisitos.every(req =>
+                document.getElementById(req)?.classList.contains("aprobado")
+            );
+            const div = document.getElementById(ramo.codigo);
+            if (requisitosCumplidos && !div.classList.contains("aprobado")) {
+                div.classList.add("desbloqueado");
+            }
+        });
+    }
+}
+
+function aprobarRamo(codigo) {
+    const div = document.getElementById(codigo);
+    if (!div.classList.contains("desbloqueado")) return;
+    div.classList.add("aprobado");
+    actualizarDesbloqueo();
+}
+
+actualizarDesbloqueo();
