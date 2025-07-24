@@ -15,11 +15,11 @@ const semestres = {
         { codigo: "HH-101", nombre: "Historia de Honduras", requisitos: [] }
     ],
     "Tercer Semestre": [
-        { codigo: "OptCN", nombre: "Optativa de Ciencias Naturales", requisitos: ["BI-121"] },
-        { codigo: "OptHum", nombre: "Optativa de Humanidades", requisitos: ["FF-101", "HH-101"] },
-        { codigo: "OptArt", nombre: "Optativa de Arte o Deporte", requisitos: [] },
-        { codigo: "IOE-041", nombre: "Introducción a la Odontología", requisitos: [] },
-        { codigo: "Optlnga", nombre: "Optativa de Lengua", requisitos: ["EG-101"] }
+        { codigo: "", nombre: "Optativa de Ciencias Naturales", requisitos: ["BI-121"] },
+        { codigo: "", nombre: "Optativa de Humanidades", requisitos: ["FF-101", "HH-101"] },
+        { codigo: "", nombre: "Optativa de Arte o Deporte", requisitos: [] },
+        { codigo: "", nombre: "Optativa de Lengua", requisitos: ["EG-101"] },
+        { codigo: "IOE-041", nombre: "Introducción a la Odontología", requisitos: [] }
     ],
     "Cuarto Semestre": [
         { codigo: "AM-221", nombre: "Anatomía Macroscópica", requisitos: ["QQ-214", "BI-121"] },
@@ -30,8 +30,8 @@ const semestres = {
     ],
     "Quinto Semestre": [
         { codigo: "AME-184", nombre: "Anatomía y Modelado Dental", requisitos: ["AM-221"] },
-        { codigo: "ACE-194", nombre: "Anatomía de Cabeza y Cuello", requisitos: ["AM-221", "NE-111"] },
-        { codigo: "FM-111", nombre: "Fisiología I", requisitos: ["AM-221"] },
+        { codigo: "ACE-194", nombre: "Anatomía de Cabeza y Cuello", requisitos: ["AM-221", "NA-111"] },
+        { codigo: "FM-111", nombre: "Fisiología I", requisitos: ["AM-221"] , "NA-111" },
         { codigo: "MB-111", nombre: "Microbiología", requisitos: ["AM-221", "NA-111"] },
         { codigo: "BQ-111", nombre: "Bioquímica", requisitos: ["HX-101", "EL-111"] },
         { codigo: "HEE-234", nombre: "Histología y Embriología Bucodental", requisitos: ["HX-101", "EL-111"] },
@@ -46,10 +46,10 @@ const semestres = {
         { codigo: "PGE-285", nombre: "Patología General", requisitos: ["MB-111", "FM-111"] }
     ],
     "Séptimo Semestre": [
-        { codigo: "OPE-326", nombre: "Operatoria Dental I", requisitos: ["HEE-224", "OCE-265"] },
+        { codigo: "OPE-326", nombre: "Operatoria Dental I", requisitos: ["HEE-234", "OCE-265"] },
         { codigo: "ESE-336", nombre: "Estomatologia", requisitos: ["PGE-285", "RDE-275"] },
-        { codigo: "SEE-336", nombre: "Semiologia", requisitos: ["PGE-285", "FC-511"] },
-        { codigo: "PGE-385", nombre: "Cirugia Bucal I", requisitos: ["PGE-285", "FC-511"] },
+        { codigo: "SEE-346", nombre: "Semiologia", requisitos: ["PGE-285", "FC-511"] },
+        { codigo: "CBE-356", nombre: "Cirugia Bucal I", requisitos: ["PGE-285", "FC-511"] },
         { codigo: "TAE-366", nombre: "Terapeutica Aplicada", requisitos: ["FC-511"] },
         { codigo: "MIE-315", nombre: "Metodología de la Investigación", requisitos: ["EPE-244"] }
     ],
@@ -63,8 +63,8 @@ const semestres = {
     ],
     "Noveno Semestre": [
         { codigo: "PRE-458", nombre: "Prótesis Removible II", requisitos: ["PRE-387", "OPE-397"] },
-        { codigo: "OPE-457", nombre: "Operatoria Dental III", requisitos: ["OPE-397"] },
-        { codigo: "ESE-407", nombre: "Cirugía Bucal II", requisitos: ["ESE-387"] },
+        { codigo: "OPE-468", nombre: "Operatoria Dental III", requisitos: ["OPE-397"] },
+        { codigo: "EPAE-478", nombre: "Paidodoncia I", requisitos: ["ESE-387"] },
         { codigo: "PRE-478", nombre: "Prótesis Fija I", requisitos: ["ESE-407"] },
         { codigo: "EDE-457", nombre: "Endodoncia II", requisitos: ["EDE-437"] }
     ],
