@@ -10,6 +10,7 @@ const semestres = {
     "Segundo Semestre": [
         { codigo: "QQ-214", nombre: "Química Orgánica", requisitos: ["QQ-103", "BI-121"] },
         { codigo: "MM-241", nombre: "Bioestadística", requisitos: ["MM-112"] },
+        { codigo: "FS-104", nombre: "fisica General", requisitos: [] },
         { codigo: "FI-101", nombre: "Filosofía", requisitos: [] },
         { codigo: "HH-101", nombre: "Historia de Honduras", requisitos: [] }
     ],
